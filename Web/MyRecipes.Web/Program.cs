@@ -2,17 +2,6 @@
 {
     using System.Reflection;
 
-    using MyRecipes.Data;
-    using MyRecipes.Data.Common;
-    using MyRecipes.Data.Common.Repositories;
-    using MyRecipes.Data.Models;
-    using MyRecipes.Data.Repositories;
-    using MyRecipes.Data.Seeding;
-    using MyRecipes.Services.Data;
-    using MyRecipes.Services.Mapping;
-    using MyRecipes.Services.Messaging;
-    using MyRecipes.Web.ViewModels;
-
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
@@ -20,6 +9,16 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+
+    using MyRecipes.Data;
+    using MyRecipes.Data.Common;
+    using MyRecipes.Data.Common.Repositories;
+    using MyRecipes.Data.Models;
+    using MyRecipes.Data.Repositories;
+    using MyRecipes.Data.Seeding;
+    using MyRecipes.Services.Mapping;
+    using MyRecipes.Services.Messaging;
+    using MyRecipes.Web.ViewModels;
 
     public class Program
     {
@@ -64,7 +63,6 @@
 
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
-            services.AddTransient<ISettingsService, SettingsService>();
         }
 
         private static void Configure(WebApplication app)
