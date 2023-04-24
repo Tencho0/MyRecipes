@@ -65,6 +65,8 @@
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<IGetCountsService, GetCountsService>();
+            services.AddTransient<ICategoriesServices, CategoriesServices>();
+            services.AddTransient<IRecipesService, RecipesService>();
         }
 
         private static void Configure(WebApplication app)

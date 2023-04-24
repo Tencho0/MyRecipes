@@ -12,7 +12,7 @@
         {
             if (dbContext.Categories.Any())
             {
-
+                return;
             }
 
             await dbContext.Categories.AddAsync(new Category { Name = "Тарт" });
