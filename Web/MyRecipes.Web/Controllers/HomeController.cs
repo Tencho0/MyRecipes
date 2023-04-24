@@ -1,29 +1,31 @@
 ﻿namespace MyRecipes.Web.Controllers
 {
     using System.Diagnostics;
-    using System.Linq;
+
+    using AutoMapper;
     using Microsoft.AspNetCore.Mvc;
-    using MyRecipes.Data;
+    using MyRecipes.Services.Data;
     using MyRecipes.Web.ViewModels;
     using MyRecipes.Web.ViewModels.Home;
 
     public class HomeController : BaseController
     {
-        private readonly ApplicationDbContext db;
+        private readonly IGetCountsService countsService;
 
-        public HomeController(ApplicationDbContext db)
+        public HomeController(IGetCountsService countsService)
         {
-            this.db = db;
+            this.countsService = countsService;
         }
 
         public IActionResult Index()
         {
-            var viewModel = new IndexViewModel()
+            var countsDto = this.countsService.GetCounts();
+            var viewModel = new IndexViewModel
             {
-                CategoriesCount = this.db.Categories.Count(),
-                ImagesCount = this.db.Images.Count(),
-                IngredientsCount = this.db.Ingredients.Count(),
-                RecipesCount = this.db.Recipes.Count(),
+                CategoriesCount = countsDto.CategoriesCount,
+                RecipesCount = countsDto.RecipesCount,
+                IngredientsCount = countsDto.IngredientsCount,
+                ImagesCount = countsDto.ImagesCount,
             };
 
             return this.View(viewModel);
